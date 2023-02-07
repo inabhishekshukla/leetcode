@@ -1,0 +1,21 @@
+func isValidSudoku(_ board: [[Character]]) -> Bool {
+        var row: [Set] = Array(repeating: Set<Int>(), count: 9)
+        var col: [Set] = Array(repeating: Set<Int>(), count: 9)
+        var square: [Set] = Array(repeating: Set<Int>(), count: 9)
+    
+        for i in 0..<9 {
+            for j in 0..<9 {
+                guard let curr = Int(String(board[i][j])) else { continue }
+                let squareIndex = i/3 * 3 + j/3
+                if row[i].contains(curr) ||
+                    col[j].contains(curr) || 
+                    square[squareIndex].contains(curr) {
+                        return false
+                    }
+                row[i].insert(curr)
+                col[j].insert(curr)
+                square[squareIndex].insert(curr)
+            }
+        }
+        return true
+    }
